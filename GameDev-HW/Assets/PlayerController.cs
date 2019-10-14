@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     // Start is called before the first frame update
     float speed = 0.1f;
+    float jump_force = 600;
     Animator animator;
     Vector2 position;
     void Start()
@@ -17,9 +18,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        bool jumpPressed = Input.GetKeyDown(KeyCode.W);
         bool rightPressed = Input.GetKey(KeyCode.D);
         bool leftPressed = Input.GetKey(KeyCode.A);
-        if (rightPressed || leftPressed)
+        if (jumpPressed)
+        {
+            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jump_force));
+        }
+        else if (rightPressed || leftPressed)
         {
             position = GetComponent<Transform>().position;
             if (rightPressed)
