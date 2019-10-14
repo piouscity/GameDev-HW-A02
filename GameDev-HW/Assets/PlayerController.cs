@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
         bool leftPressed = Input.GetKey(KeyCode.A);
         if (rightPressed || leftPressed)
         {
+            position = GetComponent<Transform>().position;
             if (rightPressed)
             {
                 position.x += speed;
