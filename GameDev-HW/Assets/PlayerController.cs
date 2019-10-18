@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    float speed = 0.1f;
-    float jump_force = 600;
+    public float speed = 0.1f;
+    public float jump_force = 600;
+    public float left_limit = -12;
+    public float right_limit = 100;
     int jump_combo = 0;
     Animator animator;
     Vector2 position;
+    // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
@@ -41,7 +43,8 @@ public class PlayerController : MonoBehaviour
                 position.x -= speed;
                 GetComponent<SpriteRenderer>().flipX = true;
             }
-            GetComponent<Transform>().position = position;
+            if (position.x >= left_limit && position.x <= right_limit)
+                GetComponent<Transform>().position = position;
             animator.SetBool("moving", true);
         }
         else
